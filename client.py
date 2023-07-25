@@ -7,6 +7,7 @@ from message import Message
 
 # Classe do cliente
 class Client:
+    
     # Inicializa o cliente com uma lista de endereços (tuplas de IP e porta) dos servidores
     def __init__(self, addresses: List[Tuple[str, int]]):
         self.addresses = addresses

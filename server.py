@@ -6,6 +6,7 @@ from message import Message
 
 # Classe que representa o servidor
 class Server:
+
     # Inicializa o servidor com os endereços do próprio servidor, líder e outros servidores
     def __init__(
         self,
@@ -35,7 +36,9 @@ class Server:
     # Lida com uma solicitação recebida de um cliente
     def handle_request(self, socket: socket, ip: str, port: int):
         with socket:
+            
             msg = Message.decode(socket.recv(4096))
+
             # Lida com o comando GET recebido pelo cliente
             if msg.type == "GET":
                 if not msg.key:
@@ -44,6 +47,7 @@ class Server:
                 print(
                     f"Cliente {ip}:{port} GET key:{msg.key} ts:{msg.timestamp}. Meu ts é {response.timestamp}, portanto devolvendo {response.value}"
                 )
+
             # Lida com o comando PUT recebido pelo cliente    
             elif msg.type == "PUT":
                 if not msg.key:
@@ -58,6 +62,7 @@ class Server:
                     )
                 else:
                     response = self.forward_message_to_leader(msg)
+
             # Lida com a mensagem de replicação (apenas recebida pelo líder)
             elif msg.type == "REPLICATION":
                 if not msg.key:
