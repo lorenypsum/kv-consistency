@@ -18,12 +18,15 @@ class Client:
         while True:
             # Solicita o comando ao usuário
             cmd = input("Digite seu comando (INIT, GET, PUT): ")
+            # Reseta timestamps, inicialização já é feita pelo construtor.
             if cmd == "INIT":
-                pass
+                self.timestamps = {}
+            # Chama o método para lidar com o comando GET
             elif cmd == "GET":
-                self.handle_get()  # Chama o método para lidar com o comando GET
+                self.handle_get()
+            # Chama o método para lidar com o comando PUT  
             elif cmd == "PUT":
-                self.handle_put()  # Chama o método para lidar com o comando PUT
+                self.handle_put()  
 
     # Lida com o comando GET
     def handle_get(self):
